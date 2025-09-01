@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class Persona : MonoBehaviour
+public class Persona
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public string nombre;
+    public string correo;
+    public string direccion;
 
-    // Update is called once per frame
-    void Update()
+    public Persona(string nombre, string correo, string direccion)
     {
-        
+        this.nombre = nombre;
+        this.correo = correo;
+        this.direccion = direccion;
     }
 }

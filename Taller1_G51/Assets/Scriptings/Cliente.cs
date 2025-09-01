@@ -1,16 +1,22 @@
-using UnityEngine;
+using System;
 
-public class Cliente : MonoBehaviour
+public class Cliente : Persona
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public string idCliente;
+    public string tramite; 
+    public float tiempoAtencion;
 
-    // Update is called once per frame
-    void Update()
+    public Cliente(
+        string nombre,
+        string correo,
+        string direccion,
+        string idCliente,
+        string tramite,
+        float tiempoAtencion
+    ) : base(nombre, correo, direccion)
     {
-        
+        this.idCliente = idCliente;
+        this.tramite = tramite;
+        this.tiempoAtencion = tiempoAtencion;
     }
 }
