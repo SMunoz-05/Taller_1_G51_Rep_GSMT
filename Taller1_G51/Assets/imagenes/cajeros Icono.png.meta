@@ -173,7 +173,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cajeros Icono_0: -6406992442018160828
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

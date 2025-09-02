@@ -18,7 +18,7 @@ namespace PackagePersona
 
         }
 
-        public Cliente(string idCliente, string tramite, float tiempoAtencion, string nombre, string correo, string direccion)
+        public Cliente(string nombre, string correo, string direccion,string idCliente, string tramite, float tiempoAtencion)
          : base(nombre, correo, direccion)
         {
             this.IdCliente = idCliente;
