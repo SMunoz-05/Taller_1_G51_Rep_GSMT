@@ -1,44 +1,38 @@
-using System.Collections;
+﻿using PackagePersona;
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections;
 
 public class Cajero : MonoBehaviour
 {
-    public int id; 
-    public bool estaLibre = true;
+    public int idCajero;
+    public bool ocupado = false;
     public int clientesAtendidos = 0;
-    public float tiempoTotalAtencion = 0f;
+    public float tiempoTotal = 0f;
 
-    public Image panelVisual; 
-    public Text estadoTexto; 
-
-    private Cliente clienteActual;
-
-    public void ActualizarEstado(bool libre)
+    // ✅ En lugar de constructor, usamos un método de inicialización
+    public void Inicializar(int id)
     {
-        estaLibre = libre;
-        if (libre)
-        {
-            panelVisual.color = Color.green;
-            estadoTexto.text = "Libre";
-        }
-        else
-        {
-            panelVisual.color = Color.red;
-            estadoTexto.text = "Ocupado";
-        }
+        idCajero = id;
     }
 
-    public IEnumerator AtenderCliente(Cliente cliente, System.Action onTerminar)
+    public IEnumerator AtenderCliente(Cliente cliente)
     {
-        clienteActual = cliente;
-        ActualizarEstado(false);
+        ocupado = true;
+        Debug.Log($"Cajero {idCajero} atendiendo a {cliente.idCliente} ({cliente.tramite})");
+
+        // Simula el tiempo de atención
+        yield return new WaitForSeconds(cliente.tiempoAtencion);
+
         clientesAtendidos++;
-        float tiempo = cliente.tiempoAtencion;
-        tiempoTotalAtencion += tiempo;
-        yield return new WaitForSeconds(tiempo);
-        clienteActual = null;
-        ActualizarEstado(true);
-        onTerminar?.Invoke();
+        tiempoTotal += cliente.tiempoAtencion;
+        ocupado = false;
+
+        Debug.Log($"Cajero {idCajero} terminó con {cliente.idCliente}");
+    }
+
+    // Método opcional para obtener estadísticas
+    public string GetEstadisticas()
+    {
+        return $"📊 Cajero {idCajero}: {clientesAtendidos} clientes, {tiempoTotal} seg en total.";
     }
 }

@@ -1,22 +1,29 @@
-using System;
+using UnityEngine;
 
-public class Cliente : Persona
+namespace PackagePersona
 {
-    public string idCliente;
-    public string tramite; 
-    public float tiempoAtencion;
-
-    public Cliente(
-        string nombre,
-        string correo,
-        string direccion,
-        string idCliente,
-        string tramite,
-        float tiempoAtencion
-    ) : base(nombre, correo, direccion)
+    public class Cliente : Persona
     {
-        this.idCliente = idCliente;
-        this.tramite = tramite;
-        this.tiempoAtencion = tiempoAtencion;
-    }
+
+        public string idCliente;
+        public string tramite;
+        public float tiempoAtencion;
+
+        public string IdCliente { get => idCliente; set => idCliente = value; }
+        public string Tramite { get => tramite; set => tramite = value; }
+        public float TiempoAtencion { get => tiempoAtencion; set => tiempoAtencion = value; }
+
+        public Cliente()
+        {
+
+        }
+
+        public Cliente(string nombre, string correo, string direccion,string idCliente, string tramite, float tiempoAtencion)
+         : base(nombre, correo, direccion)
+        {
+            this.IdCliente = idCliente;
+            this.Tramite = tramite;
+            this.TiempoAtencion = tiempoAtencion;
+        }
+    }   
 }
