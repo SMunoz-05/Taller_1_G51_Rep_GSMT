@@ -16,15 +16,19 @@ public class Consola : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Inicializa cajeros
+        cajeros = new Cajero[4]; // Por ejemplo, 4 cajeros
+
         for (int i = 0; i < cajeros.Length; i++)
         {
-            cajeros[i] = new Cajero(i + 1);
+            GameObject cajeroGO = new GameObject("Cajero" + (i + 1));
+            Cajero c = cajeroGO.AddComponent<Cajero>();
+            c.Inicializar(i + 1);  // método que creamos en Cajero.cs
+            cajeros[i] = c;
         }
-
     }
 
-  
+
+
 
     public void Iniciar()
     {
