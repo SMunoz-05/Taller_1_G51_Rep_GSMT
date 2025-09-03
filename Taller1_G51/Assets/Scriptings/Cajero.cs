@@ -1,38 +1,40 @@
 ﻿using PackagePersona;
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class Cajero : MonoBehaviour
 {
-    public int idCajero;
-    public bool ocupado = false;
+    public int id; 
+    public bool estaLibre = true;
     public int clientesAtendidos = 0;
-    public float tiempoTotal = 0f;
+    public float tiempoTotalAtencion = 0f;
 
-    // ✅ En lugar de constructor, usamos un método de inicialización
-    public void Inicializar(int id)
+    public Image panelVisual; 
+    public Text estadoTexto; 
+
+    private Cliente clienteActual;
+
+    public void ActualizarEstado(bool libre)
     {
-        idCajero = id;
+        estaLibre = libre;
+        if (estadoTexto != null)
+        {
+            estadoTexto.text = libre ? "Libre" : "Ocupado";
+            estadoTexto.color = libre ? Color.green : Color.red;
+        }
     }
 
-    public IEnumerator AtenderCliente(Cliente cliente)
+    public IEnumerator AtenderCliente(Cliente cliente, System.Action onTerminar)
     {
-        ocupado = true;
-        Debug.Log($"Cajero {idCajero} atendiendo a {cliente.idCliente} ({cliente.tramite})");
-
-        // Simula el tiempo de atención
-        yield return new WaitForSeconds(cliente.tiempoAtencion);
-
+        clienteActual = cliente;
+        ActualizarEstado(false);
         clientesAtendidos++;
-        tiempoTotal += cliente.tiempoAtencion;
-        ocupado = false;
-
-        Debug.Log($"Cajero {idCajero} terminó con {cliente.idCliente}");
-    }
-
-    // Método opcional para obtener estadísticas
-    public string GetEstadisticas()
-    {
-        return $"📊 Cajero {idCajero}: {clientesAtendidos} clientes, {tiempoTotal} seg en total.";
+        float tiempo = cliente.tiempoAtencion;
+        tiempoTotalAtencion += tiempo;
+        yield return new WaitForSeconds(tiempo);
+        clienteActual = null;
+        ActualizarEstado(true);
+        onTerminar?.Invoke();
     }
 }

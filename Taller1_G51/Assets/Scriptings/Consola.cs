@@ -1,80 +1,196 @@
 using PackagePersona;
-using System.Collections.Generic;
-using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+[System.Serializable]
+public class CajeroData
+{
+    public int clientesAtendidos;
+    public float tiempoTotalAtencion;
+}
+
+[System.Serializable]
+public class DatosTaller
+{
+    public int clientesSinAtender;
+    public List<CajeroData> cajeros;
+    public int totalConsignaciones;
+}
 
 public class Consola : MonoBehaviour
 {
-    
-    public Queue<Cliente> colaClientes = new Queue<Cliente>();
-    public Cajero[] cajeros = new Cajero[4];
+    [Header("UI")]
+    public Button botonIniciar;
+    public Button botonDetener;
+    public TextMeshProUGUI textoClientesEnCola; 
+    public TextMeshProUGUI textoConsignaciones;
+    public TextMeshProUGUI estadoTexto;
+    public bool estaLibre = true;
+    public Cajero[] cajeros;
 
-    private bool generandoClientes = false;
-    private int contadorClientes = 0;
+    private Queue<Cliente> colaClientes = new Queue<Cliente>();
+    private bool generando = false;
+    private int totalConsignaciones = 0;
 
+    private string[] nombres = { "Ana", "Luis", "Maria", "Jorge", "Sofia" };
+    private string[] tramites = { "Retirar", "Consignar" };
+    private string direccionFija = "Calle Falsa 123";
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        cajeros = new Cajero[4]; // Por ejemplo, 4 cajeros
-
-        for (int i = 0; i < cajeros.Length; i++)
+        botonIniciar.onClick.AddListener(Iniciar);
+        botonDetener.onClick.AddListener(Detener);
+        foreach (var cajero in cajeros)
         {
-            GameObject cajeroGO = new GameObject("Cajero" + (i + 1));
-            Cajero c = cajeroGO.AddComponent<Cajero>();
-            c.Inicializar(i + 1);  // método que creamos en Cajero.cs
-            cajeros[i] = c;
+            cajero.ActualizarEstado(true);
         }
+        ActualizarIndicadores();
+        ActualizarClientesEnCola();
     }
 
-
-
-
-    public void Iniciar()
+    void Iniciar()
     {
-        generandoClientes = true;
-        InvokeRepeating("GenerarClientes", 1f, 1f);
-        StartCoroutine(AsignarClientes());
-    }
-
-    public void Detener()
-    {
-        generandoClientes = false;
-        CancelInvoke("GenerarClientes");
-    }
-
-    void GenerarClientes()
-    {
-        if (!generandoClientes) return;
-
-        int cantidad = Random.Range(1, 4); // 1 a 3 clientes por segundo
-        for (int i = 0; i < cantidad; i++)
+        if (!generando)
         {
-            contadorClientes++;
-            string tramite = Random.value > 0.5f ? "Retiro" : "Consignar";
-            float tiempo = Random.Range(2f, 5f);
-
-            Cliente nuevo = new Cliente("Cliente" + contadorClientes, "correo@ejemplo.com", "direccion" , 
-                "C" + contadorClientes, tramite, tiempo);
-
-            colaClientes.Enqueue(nuevo);
-            Debug.Log($"[COLA] Se agregó {nuevo.idCliente} - {nuevo.tramite} (t={nuevo.tiempoAtencion})");
-        }
-    }
-
-    IEnumerator AsignarClientes()
-    {
-        while (true)
-        {
-            foreach (Cajero cajero in cajeros)
+            generando = true;
+            StartCoroutine(GenerarClientes());
+            foreach (var cajero in cajeros)
             {
-                if (!cajero.ocupado && colaClientes.Count > 0)
-                {
-                    Cliente cliente = colaClientes.Dequeue();
-                    StartCoroutine(cajero.AtenderCliente(cliente));
-                }
+                StartCoroutine(AtenderCajero(cajero));
+            }
+        }
+    }
+
+    void Detener()
+    {
+        generando = false;
+        StopAllCoroutines();
+        GuardarDatosJSON();
+    }
+
+    IEnumerator GenerarClientes()
+    {
+        while (generando)
+        {
+            int cantidad = Random.Range(1, 4);
+            for (int i = 0; i < cantidad; i++)
+            {
+                Cliente nuevo = CrearClienteAleatorio();
+                colaClientes.Enqueue(nuevo);
+            }
+            ActualizarIndicadores();
+            ActualizarClientesEnCola();
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    Cliente CrearClienteAleatorio()
+    {
+        string nombre = nombres[Random.Range(0, nombres.Length)];
+        string correo = nombre.ToLower() + "@correo.com";
+        string id = System.Guid.NewGuid().ToString().Substring(0, 8);
+        string tramite = tramites[Random.Range(0, tramites.Length)];
+        float tiempo = Random.Range(2f, 5f);
+        return new Cliente(nombre, correo, direccionFija, id, tramite, tiempo);
+    }
+
+    IEnumerator AtenderCajero(Cajero cajero)
+    {
+        while (generando)
+        {
+            if (colaClientes.Count > 0 && cajero.estaLibre)
+            {
+                Cliente cliente = colaClientes.Dequeue();
+                if (cliente.tramite == "Consignar")
+                    totalConsignaciones++;
+
+                ActualizarIndicadores();
+                ActualizarClientesEnCola();
+
+                yield return StartCoroutine(cajero.AtenderCliente(cliente, null));
+
+
+                yield return new WaitForSeconds(1.5f);
             }
             yield return null;
+        }
+    }
+
+    public void ActualizarEstado(bool libre)
+    {
+        estaLibre = libre;
+        if (estadoTexto != null)
+        {
+            estadoTexto.text = libre ? "Libre" : "Ocupado";
+            estadoTexto.color = libre ? Color.green : Color.red;
+        }
+    }
+
+    void ActualizarIndicadores()
+    {
+        textoConsignaciones.text = $"Consignaciones realizadas: {totalConsignaciones}";
+    }
+
+    void ActualizarClientesEnCola()
+    {
+        if (textoClientesEnCola == null)
+        {
+            Debug.LogWarning("textoClientesEnCola no está asignado.");
+            return;
+        }
+
+        if (colaClientes.Count == 0)
+        {
+            textoClientesEnCola.text = "No hay clientes en cola";
+            return;
+        }
+
+        string texto = "Clientes en cola:\n";
+        foreach (var cliente in colaClientes)
+        {
+            texto += $"{cliente.nombre} | {cliente.correo} | {cliente.direccion}\n";
+        }
+        textoClientesEnCola.text = texto;
+    }
+
+
+    public bool GuardarDatosJSON()
+    {
+        try
+        {
+            DatosTaller datos = new DatosTaller
+            {
+                clientesSinAtender = colaClientes.Count,
+                totalConsignaciones = totalConsignaciones,
+                cajeros = new List<CajeroData>()
+            };
+            foreach (var cajero in cajeros)
+            {
+                datos.cajeros.Add(new CajeroData
+                {
+                    clientesAtendidos = cajero.clientesAtendidos,
+                    tiempoTotalAtencion = cajero.tiempoTotalAtencion
+                });
+            }
+            string jsonString = JsonUtility.ToJson(datos, true);
+            string folderPath = Application.streamingAssetsPath;
+            if (!System.IO.Directory.Exists(folderPath))
+            {
+                System.IO.Directory.CreateDirectory(folderPath);
+            }
+            string filePath = System.IO.Path.Combine(folderPath, "resultadoTaller.json");
+            System.IO.File.WriteAllText(filePath, jsonString);
+            Debug.Log("Archivo JSON guardado correctamente en: " + filePath);
+            return true;
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Error al guardar archivo JSON: " + ex.Message);
+            return false;
         }
     }
 }

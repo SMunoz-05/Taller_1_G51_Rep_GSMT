@@ -7,7 +7,7 @@ namespace PackagePersona
 
 
     [Serializable]
-    public class Persona : MonoBehaviour
+    public class Persona 
     {
         public string nombre;
         public string correo;

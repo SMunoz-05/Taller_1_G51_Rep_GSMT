@@ -1,0 +1,22 @@
+{
+    "clientesSinAtender": 22,
+    "cajeros": [
+        {
+            "clientesAtendidos": 4,
+            "tiempoTotalAtencion": 14.906414985656739
+        },
+        {
+            "clientesAtendidos": 3,
+            "tiempoTotalAtencion": 12.040224075317383
+        },
+        {
+            "clientesAtendidos": 3,
+            "tiempoTotalAtencion": 12.382513046264649
+        },
+        {
+            "clientesAtendidos": 3,
+            "tiempoTotalAtencion": 12.033914566040039
+        }
+    ],
+    "totalConsignaciones": 6
+}
