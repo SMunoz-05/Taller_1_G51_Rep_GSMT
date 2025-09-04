@@ -3,20 +3,20 @@
     "cajeros": [
         {
             "clientesAtendidos": 4,
-            "tiempoTotalAtencion": 14.906414985656739
+            "tiempoTotalAtencion": 13.06892204284668
         },
         {
-            "clientesAtendidos": 3,
-            "tiempoTotalAtencion": 12.040224075317383
+            "clientesAtendidos": 4,
+            "tiempoTotalAtencion": 15.592315673828125
         },
         {
-            "clientesAtendidos": 3,
-            "tiempoTotalAtencion": 12.382513046264649
+            "clientesAtendidos": 4,
+            "tiempoTotalAtencion": 14.736227989196778
         },
         {
-            "clientesAtendidos": 3,
-            "tiempoTotalAtencion": 12.033914566040039
+            "clientesAtendidos": 4,
+            "tiempoTotalAtencion": 11.21583080291748
         }
     ],
-    "totalConsignaciones": 6
+    "totalConsignaciones": 4
 }
