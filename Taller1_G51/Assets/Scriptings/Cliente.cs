@@ -4,7 +4,6 @@ namespace PackagePersona
 {
     public class Cliente : Persona
     {
-
         public string idCliente;
         public string tramite;
         public float tiempoAtencion;
@@ -15,15 +14,19 @@ namespace PackagePersona
 
         public Cliente()
         {
-
         }
 
-        public Cliente(string nombre, string correo, string direccion,string idCliente, string tramite, float tiempoAtencion)
-         : base(nombre, correo, direccion)
+        public Cliente(string nombre, string correo, string direccion, string idCliente, string tramite, float tiempoAtencion)
+            : base(nombre, correo, direccion)
         {
             this.IdCliente = idCliente;
             this.Tramite = tramite;
             this.TiempoAtencion = tiempoAtencion;
         }
-    }   
+
+        public override string ToString()
+        {
+            return $"{nombre} | {correo} | {direccion} | Trámite: {Tramite} | Tiempo: {TiempoAtencion:F1}s";
+        }
+    }
 }
