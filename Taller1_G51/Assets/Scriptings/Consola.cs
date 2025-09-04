@@ -2,6 +2,7 @@ using PackagePersona;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,12 +37,13 @@ public class Consola : MonoBehaviour
     private bool generando = false;
     private int totalConsignaciones = 0;
 
-    private string[] nombres = { "Ana", "Luis", "Maria", "Jorge", "Sofia" };
+    private string[] nombres;
     private string[] tramites = { "Retirar", "Consignar" };
-    private string direccionFija = "Calle Falsa 123";
+    private string[] direcciones;
 
     private void Start()
     {
+
         botonIniciar.onClick.AddListener(Iniciar);
         botonDetener.onClick.AddListener(Detener);
         foreach (var cajero in cajeros)
@@ -50,7 +52,46 @@ public class Consola : MonoBehaviour
         }
         ActualizarIndicadores();
         ActualizarClientesEnCola();
+        CargarNombresDesdeArchivo();
+        CargarDireccionesDesdeArchivo();
     }
+
+    void CargarNombresDesdeArchivo()
+    {
+        string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "nombres.txt");
+        if (System.IO.File.Exists(filePath))
+        {
+            nombres = System.IO.File.ReadAllLines(filePath)
+                                     .Where(l => !string.IsNullOrWhiteSpace(l)) // quitar líneas vacías
+                                     .ToArray();
+            Debug.Log("Nombres cargados: " + nombres.Length);
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró el archivo de nombres en: " + filePath);       
+            // si no existe, usar un fallback
+            nombres = new string[] { "Ana", "Luis", "Maria", "Jorge", "Sofia" };
+        }
+    }
+
+    void CargarDireccionesDesdeArchivo()
+    {
+        string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "direcciones.txt");
+        if (System.IO.File.Exists(filePath))
+        {
+            direcciones = System.IO.File.ReadAllLines(filePath)
+                                        .Where(l => !string.IsNullOrWhiteSpace(l))
+                                        .ToArray();
+            Debug.Log("Direcciones cargadas: " + direcciones.Length);
+        }
+        else
+        {
+            Debug.LogWarning("No se encontró el archivo de direcciones en: " + filePath);
+            // fallback por si no existe el archivo
+            direcciones = new string[] { "Calle Falsa 123" };
+        }
+    }
+
 
     void Iniciar()
     {
@@ -92,11 +133,13 @@ public class Consola : MonoBehaviour
     {
         string nombre = nombres[Random.Range(0, nombres.Length)];
         string correo = nombre.ToLower() + "@correo.com";
+        string direccion = direcciones[Random.Range(0, direcciones.Length)];
         string id = System.Guid.NewGuid().ToString().Substring(0, 8);
         string tramite = tramites[Random.Range(0, tramites.Length)];
         float tiempo = Random.Range(2f, 5f);
-        return new Cliente(nombre, correo, direccionFija, id, tramite, tiempo);
+        return new Cliente(nombre, correo, direccion, id, tramite, tiempo);
     }
+
 
     IEnumerator AtenderCajero(Cajero cajero)
     {
