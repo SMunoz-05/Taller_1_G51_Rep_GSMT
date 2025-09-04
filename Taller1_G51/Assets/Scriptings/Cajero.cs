@@ -13,6 +13,8 @@ public class Cajero : MonoBehaviour
 
     public Image panelVisual;
     public TextMeshProUGUI estadoTexto;  // ✅ ahora sí es TMP
+    [Header("UI del Cliente")]
+    public Image avatarCliente; // 👉 arrastra el objeto AvatarCliente aquí en el Inspector
 
     private Cliente clienteActual;
 
@@ -25,11 +27,13 @@ public class Cajero : MonoBehaviour
             {
                 estadoTexto.text = "Libre";
                 estadoTexto.color = Color.green;
+                if (avatarCliente != null) avatarCliente.gameObject.SetActive(false);
             }
             else
             {
                 estadoTexto.text = $"Ocupado: {cliente.nombre}";
                 estadoTexto.color = Color.red;
+                if (avatarCliente != null) avatarCliente.gameObject.SetActive(true);
             }
         }
     }
