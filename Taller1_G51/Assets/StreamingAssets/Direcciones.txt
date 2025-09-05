@@ -18,3 +18,33 @@ Carrera 40 #55-10
 Calle 85 #23-14
 Carrera 24 #19-45
 Calle 50 #60-22
+Calle 12 # 4-56
+Carrera 7 # 45-21
+Avenida Las Américas # 23-17
+Calle 89 # 15-33
+Carrera 50 # 120-09
+Calle 34 # 8A-42
+Transversal 21 # 67-10
+Carrera 13 # 98-55
+Calle 72 # 11-05
+Avenida Boyacá # 152-20
+Calle 45 # 20-18
+Carrera 9 # 61-02
+Calle 10 # 25-37
+Carrera 15 # 85-99
+Calle 100 # 7-45
+Carrera 68 # 35-15
+Calle 26 # 92-33
+Avenida Caracas # 53-70
+Calle 59 # 22-12
+Carrera 11 # 84-60
+Calle 36 # 19-41
+Carrera 30 # 17-90
+Calle 140 # 18-08
+Transversal 17 # 77-29
+Calle 60 # 9-12
+Carrera 24 # 33-27
+Calle 18 # 4-19
+Avenida Suba # 110-25
+Calle 122 # 45-77
+Carrera 5 # 32-11
