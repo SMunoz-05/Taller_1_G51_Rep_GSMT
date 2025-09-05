@@ -32,6 +32,7 @@ public class Consola : MonoBehaviour
     public TextMeshProUGUI textoClientesEnCola;
     public TextMeshProUGUI textoConsignaciones;
     public Cajero[] cajeros;
+    public TextMeshProUGUI textoSinAtender;
 
     private Queue<Cliente> colaClientes = new Queue<Cliente>();
     private bool generando = false;
@@ -179,6 +180,8 @@ public class Consola : MonoBehaviour
     void ActualizarIndicadores()
     {
         textoConsignaciones.text = $"Consignaciones realizadas: {totalConsignaciones}";
+        if (textoSinAtender != null)
+            textoSinAtender.text = $"Clientes sin atender: {colaClientes.Count}";
     }
 
     void ActualizarClientesEnCola()

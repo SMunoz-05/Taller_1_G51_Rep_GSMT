@@ -1,42 +1,53 @@
 {
-    "clientesSinAtender": 9,
+    "clientesSinAtender": 22,
     "cajeros": [
         {
             "clientesAtendidosNombres": [
-                "Lisandro Arias",
-                "Mora Blanco"
+                "Ramiro Benítez",
+                "Valentina Méndez",
+                "Ramiro Benítez",
+                "Ramiro Rossi",
+                "Lucio Suárez"
             ],
             "id": 1,
-            "clientesAtendidos": 2,
-            "tiempoTotalAtencion": 8.82217788696289
+            "clientesAtendidos": 5,
+            "tiempoTotalAtencion": 16.513349533081056
         },
         {
             "clientesAtendidosNombres": [
-                "Franco Moreno",
-                "Ramiro Rossi"
+                "Carlos Pérez",
+                "Mónica Blanco",
+                "Ramiro Benítez",
+                "Matías Ferrari",
+                "Valentina Silva"
             ],
             "id": 2,
-            "clientesAtendidos": 2,
-            "tiempoTotalAtencion": 7.182724475860596
+            "clientesAtendidos": 5,
+            "tiempoTotalAtencion": 17.285587310791017
         },
         {
             "clientesAtendidosNombres": [
-                "Juan Rodríguez",
-                "Luis Ramírez"
+                "Morena Núñez",
+                "Andrés Vargas",
+                "Ignacio Suárez",
+                "Esteban Arias",
+                "Valentina Silva"
             ],
             "id": 3,
-            "clientesAtendidos": 2,
-            "tiempoTotalAtencion": 6.04351806640625
+            "clientesAtendidos": 5,
+            "tiempoTotalAtencion": 17.001441955566408
         },
         {
             "clientesAtendidosNombres": [
-                "Thiago Rojas",
-                "Felicitas García"
+                "Paulina Giménez",
+                "Natalia Patiño",
+                "Natalia Patiño",
+                "Franco Moreno"
             ],
             "id": 4,
-            "clientesAtendidos": 2,
-            "tiempoTotalAtencion": 8.58082389831543
+            "clientesAtendidos": 4,
+            "tiempoTotalAtencion": 16.766050338745118
         }
     ],
-    "totalConsignaciones": 4
+    "totalConsignaciones": 11
 }
