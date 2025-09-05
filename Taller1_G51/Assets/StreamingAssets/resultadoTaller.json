@@ -1,22 +1,22 @@
 {
-    "clientesSinAtender": 23,
+    "clientesSinAtender": 0,
     "cajeros": [
         {
-            "clientesAtendidos": 6,
-            "tiempoTotalAtencion": 21.513818740844728
+            "clientesAtendidos": 1,
+            "tiempoTotalAtencion": 2.7974019050598146
         },
         {
-            "clientesAtendidos": 6,
-            "tiempoTotalAtencion": 17.67273712158203
+            "clientesAtendidos": 1,
+            "tiempoTotalAtencion": 2.0144448280334474
         },
         {
-            "clientesAtendidos": 6,
-            "tiempoTotalAtencion": 18.890148162841798
+            "clientesAtendidos": 1,
+            "tiempoTotalAtencion": 3.489100456237793
         },
         {
-            "clientesAtendidos": 6,
-            "tiempoTotalAtencion": 20.104032516479493
+            "clientesAtendidos": 1,
+            "tiempoTotalAtencion": 2.2028346061706545
         }
     ],
-    "totalConsignaciones": 11
+    "totalConsignaciones": 1
 }
