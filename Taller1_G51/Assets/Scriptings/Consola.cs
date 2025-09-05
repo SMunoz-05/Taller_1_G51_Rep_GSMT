@@ -24,7 +24,7 @@ public class DatosTaller
 
 public class Consola : MonoBehaviour
 {
-    [Header("UI")]
+    [Header("UI")] 
     public Button botonIniciar;
     public Button botonDetener;
     public TextMeshProUGUI textoClientesEnCola;
@@ -58,17 +58,17 @@ public class Consola : MonoBehaviour
 
     void CargarNombresDesdeArchivo()
     {
-        string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "nombres.txt");
+        string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "Nombres.txt");
         if (System.IO.File.Exists(filePath))
         {
             nombres = System.IO.File.ReadAllLines(filePath)
-                                     .Where(l => !string.IsNullOrWhiteSpace(l)) // quitar líneas vacías
-                                     .ToArray();
+                .Where(l => !string.IsNullOrWhiteSpace(l)) // quitar lï¿½neas vacï¿½as
+                .ToArray();
             Debug.Log("Nombres cargados: " + nombres.Length);
         }
         else
         {
-            Debug.LogWarning("No se encontró el archivo de nombres en: " + filePath);
+            Debug.LogWarning("No se encontrï¿½ el archivo de nombres en: " + filePath);
             // si no existe, usar un fallback
             nombres = new string[] { "Ana", "Luis", "Maria", "Jorge", "Sofia" };
         }
@@ -76,17 +76,17 @@ public class Consola : MonoBehaviour
 
     void CargarDireccionesDesdeArchivo()
     {
-        string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "direcciones.txt");
+        string filePath = System.IO.Path.Combine(Application.streamingAssetsPath, "Direcciones.txt");
         if (System.IO.File.Exists(filePath))
         {
             direcciones = System.IO.File.ReadAllLines(filePath)
-                                        .Where(l => !string.IsNullOrWhiteSpace(l))
-                                        .ToArray();
+                .Where(l => !string.IsNullOrWhiteSpace(l))
+                .ToArray();
             Debug.Log("Direcciones cargadas: " + direcciones.Length);
         }
         else
         {
-            Debug.LogWarning("No se encontró el archivo de direcciones en: " + filePath);
+            Debug.LogWarning("No se encontrï¿½ el archivo de direcciones en: " + filePath);
             // fallback por si no existe el archivo
             direcciones = new string[] { "Calle Falsa 123" };
         }
@@ -101,8 +101,6 @@ public class Consola : MonoBehaviour
         {
             generando = true;
             StartCoroutine(GenerarClientes());
-
-            // Cada cajero trabaja en su propia corrutina
             foreach (var cajero in cajeros)
             {
                 StartCoroutine(AtenderCajero(cajero));
@@ -114,8 +112,17 @@ public class Consola : MonoBehaviour
     {
         generando = false;
         StopAllCoroutines();
-        GuardarDatosJSON();
+        foreach (var cajero in cajeros)
+    {
+        cajero.ActualizarEstado(true, null); // libre sin cliente
+
     }
+        GuardarDatosJSON();
+
+    }
+    
+
+    
 
     IEnumerator GenerarClientes()
     {
@@ -127,13 +134,15 @@ public class Consola : MonoBehaviour
                 Cliente nuevo = CrearClienteAleatorio();
                 colaClientes.Enqueue(nuevo);
             }
+
             ActualizarIndicadores();
             ActualizarClientesEnCola();
             yield return new WaitForSeconds(1f);
         }
     }
-
-    Cliente CrearClienteAleatorio()
+    
+    
+    Cliente CrearClienteAleatorio() 
     {
         string nombre = nombres[Random.Range(0, nombres.Length)];
         string correo = nombre.ToLower() + "@correo.com";
@@ -157,8 +166,6 @@ public class Consola : MonoBehaviour
 
                 ActualizarIndicadores();
                 ActualizarClientesEnCola();
-
-                // Aquí el cajero atiende al cliente (cambiaré Cajero.cs para que muestre ocupado con el nombre)
                 yield return StartCoroutine(cajero.AtenderCliente(cliente));
 
                 yield return new WaitForSeconds(1.5f); // pausa entre clientes
@@ -176,7 +183,7 @@ public class Consola : MonoBehaviour
     {
         if (textoClientesEnCola == null)
         {
-            Debug.LogWarning("textoClientesEnCola no está asignado.");
+            Debug.LogWarning("textoClientesEnCola no estï¿½ asignado.");
             return;
         }
 
@@ -206,10 +213,10 @@ public class Consola : MonoBehaviour
             };
             foreach (var cajero in cajeros)
             {
-                datos.cajeros.Add(new CajeroData
+                datos.cajeros.Add(new CajeroData        
                 {
                     clientesAtendidos = cajero.clientesAtendidos,
-                    tiempoTotalAtencion = cajero.tiempoTotalAtencion
+                    tiempoTotalAtencion = cajero.tiempoTotalAtencion 
                 });
             }
             string jsonString = JsonUtility.ToJson(datos, true);

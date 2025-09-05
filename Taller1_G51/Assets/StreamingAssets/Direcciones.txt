@@ -18,3 +18,45 @@ Carrera 40 #55-10
 Calle 85 #23-14
 Carrera 24 #19-45
 Calle 50 #60-22
+Calle 10 # 25-12,  San Antonio
+Carrera 34 # 8-45,  El Peñón
+Avenida 6N # 15-30,  Granada
+Calle 5 # 66-90,  Tequendama
+Carrera 80 # 13-05,  El Ingenio
+Diagonal 23 # 17-78,  San Fernando
+Transversal 29 # 4-50,  Miraflores
+Calle 72W # 98-14,  Ciudad 2000
+Carrera 1 # 22-02,  Santa Mónica Residencial
+Avenida Roosevelt # 28-110,  San Cayetano
+Calle 9 # 44-33,  Camino Real
+Carrera 100 # 5-160,  Ciudad Jardín
+Calle 48 # 85C-20,  Caney
+Carrera 7 # 12-34,  Centenario
+Avenida de los Cerros # 2-89,  Normandía
+Calle 14 # 83-01,  La Hacienda
+Carrera 27 # 40-15,  La Flora
+Diagonal 50 # 10-67,  Junín
+Transversal 7 # 70-21,  Alfonso López
+Calle 3 Oeste # 1-98,  Arboledas
+Carrera 56 # 9-22,  Guadalupe
+Avenida 4 Oeste # 7-12,  Santa Teresita
+Calle 25 # 2-30,  Obrero
+Carrera 8 # 15-09,  San Nicolás
+Calle 80 # 26C-11,  Villa del Prado
+Carrera 68 # 16-45,  Limonar
+Diagonal 9 # 33-18,  Evaristo García
+Transversal 103 # 14-56,  Pance
+Calle 18 # 105-40,  Valle del Lili
+Carrera 15 # 3-67,  San Bosco
+Avenida Chipichape # 38N-05,  Chipichape
+Calle 64 # 7-77,  La Rivera
+Carrera 4B # 52-10,  Salomia
+Diagonal 67 # 1-29,  Menga
+Transversal 4 # 20-83,  El Piloto
+Calle 2A # 70-13,  Los Cámbulos
+Carrera 92 # 42-50,  Meléndez
+Avenida Ciudad de Cali # 80-200,  Desepaz
+Calle 33A # 15-91,  Uribe Uribe
+Carrera 24C # 6-34,  Colseguros
+
+
