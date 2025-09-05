@@ -47,10 +47,10 @@ public class Consola : MonoBehaviour
         botonIniciar.onClick.AddListener(Iniciar);
         botonDetener.onClick.AddListener(Detener);
 
-        // Inicializa los cajeros como libres
+        
         foreach (var cajero in cajeros)
         {
-            cajero.ActualizarEstado(true, null); // libre sin cliente
+            cajero.ActualizarEstado(true, null); 
         }
 
         ActualizarIndicadores();
@@ -65,14 +65,14 @@ public class Consola : MonoBehaviour
         if (System.IO.File.Exists(filePath))
         {
             nombres = System.IO.File.ReadAllLines(filePath)
-                .Where(l => !string.IsNullOrWhiteSpace(l)) // quitar l�neas vac�as
+                .Where(l => !string.IsNullOrWhiteSpace(l)) 
                 .ToArray();
             Debug.Log("Nombres cargados: " + nombres.Length);
         }
         else
         {
             Debug.LogWarning("No se encontr� el archivo de nombres en: " + filePath);
-            // si no existe, usar un fallback
+            
             nombres = new string[] { "Ana", "Luis", "Maria", "Jorge", "Sofia" };
         }
     }
@@ -90,7 +90,7 @@ public class Consola : MonoBehaviour
         else
         {
             Debug.LogWarning("No se encontr� el archivo de direcciones en: " + filePath);
-            // fallback por si no existe el archivo
+            
             direcciones = new string[] { "Calle Falsa 123" };
         }
     }
@@ -117,7 +117,7 @@ public class Consola : MonoBehaviour
         StopAllCoroutines();
         foreach (var cajero in cajeros)
     {
-        cajero.ActualizarEstado(true, null); // libre sin cliente
+        cajero.ActualizarEstado(true, null); 
 
     }
         GuardarDatosJSON();
@@ -171,7 +171,7 @@ public class Consola : MonoBehaviour
                 ActualizarClientesEnCola();
                 yield return StartCoroutine(cajero.AtenderCliente(cliente));
 
-                yield return new WaitForSeconds(1.5f); // pausa entre clientes
+                yield return new WaitForSeconds(1.5f); 
             }
             yield return null;
         }

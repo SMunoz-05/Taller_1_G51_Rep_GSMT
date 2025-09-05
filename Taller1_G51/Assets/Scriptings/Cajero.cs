@@ -1,7 +1,7 @@
 ﻿using PackagePersona;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;                 // ✅ ya lo tienes
+using TMPro;                 
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,9 +15,9 @@ public class Cajero : MonoBehaviour
     public List<string> nombresAtendidos = new List<string>();
 
     public Image panelVisual;
-    public TextMeshProUGUI estadoTexto;  // ✅ ahora sí es TMP
+    public TextMeshProUGUI estadoTexto;  
     [Header("UI del Cliente")]
-    public Image avatarCliente; // 👉 arrastra el objeto AvatarCliente aquí en el Inspector
+    public Image avatarCliente; 
 
     private Cliente clienteActual;
 
