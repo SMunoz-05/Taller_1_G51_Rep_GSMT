@@ -1,21 +1,41 @@
 {
-    "clientesSinAtender": 12,
+    "clientesSinAtender": 9,
     "cajeros": [
         {
+            "clientesAtendidosNombres": [
+                "Lisandro Arias",
+                "Mora Blanco"
+            ],
+            "id": 1,
             "clientesAtendidos": 2,
-            "tiempoTotalAtencion": 7.145997524261475
+            "tiempoTotalAtencion": 8.82217788696289
         },
         {
+            "clientesAtendidosNombres": [
+                "Franco Moreno",
+                "Ramiro Rossi"
+            ],
+            "id": 2,
             "clientesAtendidos": 2,
-            "tiempoTotalAtencion": 7.844298839569092
+            "tiempoTotalAtencion": 7.182724475860596
         },
         {
+            "clientesAtendidosNombres": [
+                "Juan Rodríguez",
+                "Luis Ramírez"
+            ],
+            "id": 3,
             "clientesAtendidos": 2,
-            "tiempoTotalAtencion": 4.896278381347656
+            "tiempoTotalAtencion": 6.04351806640625
         },
         {
+            "clientesAtendidosNombres": [
+                "Thiago Rojas",
+                "Felicitas García"
+            ],
+            "id": 4,
             "clientesAtendidos": 2,
-            "tiempoTotalAtencion": 7.785614490509033
+            "tiempoTotalAtencion": 8.58082389831543
         }
     ],
     "totalConsignaciones": 4

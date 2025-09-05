@@ -10,6 +10,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class CajeroData
 {
+    public List<string> clientesAtendidosNombres;
+    public int id;
     public int clientesAtendidos;
     public float tiempoTotalAtencion;
 }
@@ -215,8 +217,10 @@ public class Consola : MonoBehaviour
             {
                 datos.cajeros.Add(new CajeroData        
                 {
+                    id = cajero.id,
                     clientesAtendidos = cajero.clientesAtendidos,
-                    tiempoTotalAtencion = cajero.tiempoTotalAtencion 
+                    tiempoTotalAtencion = cajero.tiempoTotalAtencion,
+                    clientesAtendidosNombres = new List<string>(cajero.nombresAtendidos)
                 });
             }
             string jsonString = JsonUtility.ToJson(datos, true);

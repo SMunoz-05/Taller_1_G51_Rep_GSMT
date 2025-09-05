@@ -1,5 +1,6 @@
 ﻿using PackagePersona;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;                 // ✅ ya lo tienes
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class Cajero : MonoBehaviour
     public bool estaLibre = true;
     public int clientesAtendidos = 0;
     public float tiempoTotalAtencion = 0f;
+
+    public List<string> nombresAtendidos = new List<string>();
 
     public Image panelVisual;
     public TextMeshProUGUI estadoTexto;  // ✅ ahora sí es TMP
@@ -46,6 +49,8 @@ public class Cajero : MonoBehaviour
         clientesAtendidos++;
         float tiempo = cliente.tiempoAtencion;
         tiempoTotalAtencion += tiempo;
+
+        nombresAtendidos.Add(cliente.nombre);
 
         // Simular tiempo de atención
         yield return new WaitForSeconds(tiempo);
